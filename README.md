@@ -27,3 +27,4 @@ Automatically block or challenge IPs that exceed a defined request frequency (fo
 <br><br>
 
 Tip:**web-request-monitor.js** offers a web interface for real-time request monitoring.
+Demo: [https://cloudflare.rate-limit.workers.dev/](https://cloudflare.rate-limit.workers.dev/)
