@@ -1,7 +1,9 @@
 # Dynamic Rate Limiting
 ## Overview
 
-Enhanced Dynamic Rate Limiting Rule on Cloudflare Free Plan Using Cloudflare Workers.
+**Enhanced Dynamic Rate Limiting on Cloudflare Free Plan Using Cloudflare Workers**  
+Automatically block or challenge IPs that exceed a defined request frequency (for specific paths) within a time range (from 1 to 1440 minutes), intended to replace or supplement the default rate-limiting rule in Cloudflare's free plan.
+
 
 ## Setup
 
