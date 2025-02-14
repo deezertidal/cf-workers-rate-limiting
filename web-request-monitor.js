@@ -115,7 +115,7 @@ const htmlPage = `
     <textarea id="excludePaths" name="excludePaths" placeholder="e.g., /path1/, /path2/, comma separated, leave empty for none"></textarea>
   </div>
   <div>
-  <label for="timeRange">Max Top Paths</label>
+  <label for="maxTopPathsPerIP">Max Top Paths</label>
   <input type="number" name="maxTopPathsPerIP" placeholder="Max Top Paths per IP" min="1" max="10" value="3" required />
   </div>
   <div>
@@ -275,7 +275,7 @@ async function processRequests(requests, BlockedIps, excludePaths, requestCountT
 async function handleRequest(event) {
   const requestData = await event.request.json();
   const now = new Date();
-  const minutes = parseInt(requestData.minutes) || 100; 
+  const minutes = parseInt(requestData.timeRange) || 1440;
   const startTime = new Date(now - minutes * 60 * 1000).toISOString();  
   const endTime = now.toISOString();
   const zoneTag = requestData.zoneId;
@@ -283,7 +283,7 @@ async function handleRequest(event) {
   const monitorPaths = requestData.monitorPaths ? requestData.monitorPaths.split(',').map(path => path.trim()) : [];
   const excludePaths = requestData.excludePaths ? requestData.excludePaths.split(',').map(path => path.trim()) : [];
   const requestCountThreshold = parseInt(requestData.requestCount);
-  const maxPaths = parseInt(requestData.maxPaths) || 3;
+  const maxPaths = parseInt(requestData.maxTopPathsPerIP) || 3;
 
   try {
     const { BlockedIps, requests } = await fetchBlockedIpsAndRequests(zoneTag, startTime, endTime, apiToken, monitorPaths, excludePaths);
