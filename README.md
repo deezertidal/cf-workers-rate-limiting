@@ -24,3 +24,6 @@ Automatically block or challenge IPs that exceed a defined request frequency (fo
    - Go to **Workers settings**
    - Select **Trigger Events**
    - Click **Add Cron Triggers**
+<br><br>
+
+Tip:**web-request-monitor.js** offers a web interface for real-time request monitoring.
