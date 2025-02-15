@@ -7,89 +7,120 @@ const htmlPage = `
   <title>Cloudflare Request Monitor</title>
   <style>
   body {
-    background-color: #f9fafb;
-    margin: 0;
-    padding: 0;
+    background-color:#f9fafb;
+    margin:0;
+    padding:0;
+    font-family:'Inter',Arial,sans-serif;
+    color:#333333;
+    line-height:1.6;
   }
   h1 {
-    text-align: center;
-    font-size: 2rem;
-    color: #333;
-    margin-top: 40px;
+    text-align:center;
+    font-size:2rem;
+    font-weight:600;
+    color:#333333;
+    margin-top:50px;
+    letter-spacing:0.5px;
   }
-  .form-container {
-    width: 90%;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+  .form-container,.result-container {
+    width:90%;
+    max-width:960px;
+    margin:40px auto;
+    padding:40px;
+    background-color:#ffffff;
+    border-radius:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+    box-sizing:border-box;
+    transition:transform 0.3s ease,box-shadow 0.3s ease;
   }
-  
+  .form-container:hover,.result-container:hover {
+    box-shadow:0 15px 40px rgba(0,0,0,0.2);
+  }
   .form-container label {
-    display: block;
-    margin-bottom: 8px; 
-    font-size: 14px; 
-    color: #333;
-    font-weight: bold; 
+    display:block;
+    margin-bottom:12px;
+    font-size:16px;
+    font-weight:600;
+    color:#333333;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    opacity:0.8;
   }
-
-  .form-container input,
-  .form-container textarea,
-  .form-container select {
-    width: 90%;
-    padding: 12px 15px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: border 0.3s ease;
+  .form-container input,.form-container textarea,.form-container select {
+    width:100%;
+    padding:14px 18px;
+    margin-bottom:20px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:16px;
+    background-color:#f9fafb;
+    color:#333333;
+    transition:border-color 0.3s ease,background-color 0.3s ease;
+    box-sizing:border-box;
   }
-  
-  .form-container input:focus,
-  .form-container textarea:focus,
-  .form-container select:focus {
-    border-color: #4CAF50;
-    outline: none;
+  .form-container input:focus,.form-container textarea:focus,.form-container select:focus {
+    border-color:#F38020;
+    background-color:#fff;
+    outline:none;
   }
-
-  .form-container textarea {
-    resize: vertical;
-  }
-
   .form-container button {
-    width: 90%;
-    padding: 14px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    width:100%;
+    padding:18px;
+    background-color:#F38020;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    transition:background-color 0.3s ease,transform 0.2s ease;
+    box-sizing:border-box;
   }
-
   .form-container button:hover {
-    background-color: #0056b3;
+    background-color:#FFCC00;
   }
-
-  .result-container {
-    margin-top: 40px;
-    padding: 30px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    font-size: 16px;
+  .result-container p {
+    font-size:1.2rem;
+    font-weight:600;
+    color:#333333;
+    margin-bottom:20px;
+    text-align:center;
   }
-
   pre {
-    background-color: #f4f4f4;
-    padding: 15px;
-    border-radius: 8px;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    color: #333;
+    background-color:#f4f4f4;
+    padding:20px;
+    border-radius:10px;
+    color:#333333;
+    font-family:'Courier New',monospace;
+    font-size:14px;
+    white-space:pre-wrap;
+    word-wrap:break-word;
+    box-sizing:border-box;
+  }
+  input[type="number"] {
+    -moz-appearance:textfield;
+  }
+  input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance:none;
+    margin:0;
+  }
+  @media (max-width:768px) {
+    h1 {
+    font-size:2rem;
+  }
+  .form-container,.result-container {
+    width:95%;
+    padding:25px;
+  }
+  .form-container label {
+    font-size:14px;
+  }
+  .form-container input,.form-container textarea,.form-container select {
+    padding:12px 14px;
+  }
+  .form-container button {
+    font-size:16px;
+  }
   }
 </style>
 
@@ -131,7 +162,7 @@ const htmlPage = `
   </div>
 </form>
   </div>
-  <div class="result-container" id="result"></div>
+  <div class="result-container" id="result"><p><strong>Result:</strong></p></div>
   <script>
   document.getElementById('monitorForm').addEventListener('submit', async function (event) {
     event.preventDefault();
